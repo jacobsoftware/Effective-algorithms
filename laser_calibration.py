@@ -1,26 +1,20 @@
-def liczba_odbic(A, B):
-    n = 1
-    if B > (180.0*A)/A: return 0
+def number_of_reflections(a, b):
+    n = 0    
+    if b > (180.0-a)/2: return n
     else:
         while True:
-            if 180-2*A-B < 0: break
-            else:
-                A = 180 -2*A-B
-                n = n +1
-                
-        return n
+            if b > (180.0-n*a-b): break
+            else: n = n +1                
+        return n-1
 
+def main():
+    data_sets = int(input())
+    results = [0]*data_sets
+    for i in range(data_sets):
+        angle_a, angle_b = map(float,input().split())
+        results[i] = number_of_reflections(angle_a, angle_b)
 
+    for result in results:
+        print(result)
 
-d = int(input())
-wyniki = []
-for _ in range(d):
-    string_in = input()
-    splitted = string_in.split(' ')
-    A = float(splitted[0])
-    B = float(splitted[1])
-    wyniki.append(liczba_odbic(A, B))
-
-
-for wynik in wyniki:
-    print(wynik)
+main()
