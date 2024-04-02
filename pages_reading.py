@@ -1,42 +1,90 @@
-def read_input():
-    # Read the number of test cases
-    d = int(input())
-    test_cases = []
-    
-    # Read each test case
-    for _ in range(d):
-        n = int(input())
-        a = list(map(int, input().split()))
-        test_cases.append((n, a))
-    
-    return test_cases
+# https://www.spoj.com/problems/MWPZ031/
 
-def solve_test_case(n, a):
-    # Initialize variables
-    rounds = 0
-    flipped = False
-    
-    # Check if all cards are correctly oriented
-    while not all(a):
-        # If the first card is flipped, flip the entire stack
-        if a[0] == 1:
-            a = [1 - x for x in a]
-            flipped = not flipped
-        else:
-            # Rotate the stack until the first card is correctly oriented
-            for i in range(n):
-                if a[i] == 1:
-                    a = a[i:] + a[:i]
-                    break
-        rounds += 1
-    
-    return rounds if flipped else 0
+
+
+def pages_reading(pages,n):
+    if '1' not in pages:
+        return 0
+    elif n == 1 and pages[0] == 1:
+        return 1
+    elif '1' in pages[0] and '1' not in pages[1:] and n > 1: 
+        return 2
+    elif ('0' in pages[0] and '0' not in pages[1:]) or '0' not in pages:
+        return 1
+    else:
+        return 'NIGDY'
+
 
 def main():
-    test_cases = read_input()
-    for n, a in test_cases:
-        result = solve_test_case(n, a)
-        print(result)
+    data_sets = int(input())
+    results = [0]*data_sets
+    for i in range(data_sets):
+        n = int(input())
+        pages = input()
+        results[i] = pages_reading(pages,n)
+    for result in results: print(result)
 
-if __name__ == "__main__":
-    main()
+main()
+
+
+
+
+
+
+
+
+
+
+
+
+# def pages_reading(pages,n):
+#     rounds = 0
+#     if 1 not in pages: return rounds
+#     else:
+#         for i in range(n):
+            
+#             if pages[0] == 1 and i == 0:
+                 
+#                 for j in range(n):
+#                     print('WArunek',pages[j])
+#                     if pages[j] == 1: 
+#                         pages[j] = 0
+#                     else: 
+#                         pages[j] = 1
+#                 rounds += 1
+#             else:
+#                 pages.pop(0)
+#                 for j in range(n-1):
+#                     if j == 0 and pages[j] == 1 :
+#                         pages[0] = 0                    
+#                     elif j==0 and pages[j] == 0: 
+#                         break
+
+#                     if j != 0 and pages[j] == 1: 
+#                         pages[j] = 0
+#                     elif j != 0 and pages[j] == 0: 
+#                         pages[j] = 1
+#                 pages.append(0)
+#                 rounds += 1
+#             if 1 not in pages: 
+#                 return rounds
+        
+
+#         if 1 in pages: 
+#             return 'NIGDY'
+#         else: 
+#             return rounds
+
+
+# def main():
+#     data_sets = int(input())
+#     results = [0]*data_sets
+#     for i in range(data_sets):
+#         n = int(input())
+#         pages = list(map(int,input().split()))
+#         results[i] = pages_reading(pages,n)
+#     for result in results: print(result)
+
+# main()
+
+
